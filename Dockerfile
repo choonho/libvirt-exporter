@@ -5,6 +5,7 @@ ENV VERSION=${VERSION:-development}
 
 ENV LIBVIRT_EXPORTER_PATH=/libvirt-exporter
 ENV LIBXML2_VER=2.9.12
+ENV LIBVIRT_DOMAIN_LABEL=name
 
 RUN apk add ca-certificates g++ git libnl-dev linux-headers make libvirt-dev libvirt && \
     wget ftp://xmlsoft.org/libxml2/libxml2-${LIBXML2_VER}.tar.gz -P /tmp && \

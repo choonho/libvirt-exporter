@@ -106,3 +106,6 @@ This exporter makes use of
 bindings for libvirt. This exporter make use of the
 `GetAllDomainStats()`
 
+# Option
+
+ENV LIBVIRT_DOMAIN_LABEL=name | uuid

@@ -384,6 +384,16 @@ var (
 	errorsMap map[string]struct{}
 )
 
+// for export expression
+var domainLabelType string
+
+func init() {
+    domainLabelType = os.Getenv("LIBVIRT_DOMAIN_LABEL")
+    if domainLabelType != "uuid" {
+        domainLabelType = "name" // default: domainName
+      }
+}
+
 // WriteErrorOnce writes message to stdout only once
 // for the error
 // "err" - an error message
@@ -406,6 +416,10 @@ func CollectDomain(ch chan<- prometheus.Metric, stat libvirt.DomainStats) error 
 	if err != nil {
 		return err
 	}
+
+    if domainLabelType == "uuid" {
+        domainName = domainUUID
+    }
 
 	// Decode XML description of domain to get block device names, etc.
 	xmlDesc, err := stat.Domain.GetXMLDesc(0)
